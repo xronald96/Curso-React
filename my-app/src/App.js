@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person'
 class App extends Component {
   state = {
@@ -28,6 +28,8 @@ class App extends Component {
   }
   render() {
     let persons = null;
+    let assigment = []
+    let styleButton = []
     if (this.state.showPersons) {
       persons = (<div>
         {
@@ -40,23 +42,20 @@ class App extends Component {
             />)
           })
         }
-        {/* <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHanhler.bind(this, "Ronald")}
-          changed={this.newChangedHandler}
-        />
-        <Person name={this.state.persons[1].name}
-          age={this.state.persons[1].age}>My hobbi
-      </Person> */}
       </div>)
+      assigment.push('red')
+      styleButton.push('button-clicked')
+    }
+    if (this.state.persons.length <= 1) {
+      assigment.push('bold')
     }
 
     return (
       <div className="App">
-        Hola
+
         <button onClick={() => this.switchNameHanhler('Maxii')}> Switch names </button>
-        <button onClick={this.turningPersons}>Turn on/off</button>
+        <button className={classes.estoEste} onClick={this.turningPersons}>Turn on/off</button>
+        <p className={assigment.join(' ')}>This is really working</p>
         {persons}
       </div>
     );

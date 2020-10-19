@@ -43,15 +43,15 @@ class App extends Component {
           })
         }
       </div>)
-      assigment.push('red')
+      assigment.push(classes.red)
       styleButton.push('button-clicked')
     }
     if (this.state.persons.length <= 1) {
-      assigment.push('bold')
+      assigment.push(classes.bold)
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
 
         <button onClick={() => this.switchNameHanhler('Maxii')}> Switch names </button>
         <button className={classes.estoEste} onClick={this.turningPersons}>Turn on/off</button>

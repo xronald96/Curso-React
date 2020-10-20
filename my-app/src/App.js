@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person'
 class App extends Component {
   state = {
@@ -29,6 +29,8 @@ class App extends Component {
   }
   render() {
     let persons = null;
+    let assigment = []
+    let styleButton = []
     if (this.state.showPersons) {
       persons = (<div>
         {
@@ -42,13 +44,19 @@ class App extends Component {
           })
         }
       </div>)
+      assigment.push(classes.red)
+      styleButton.push('button-clicked')
+    }
+    if (this.state.persons.length <= 1) {
+      assigment.push(classes.bold)
     }
 
     return (
-      <div className="App">
-        Hola
+      <div className={classes.App}>
+
         <button onClick={() => this.switchNameHanhler('Maxii')}> Switch names </button>
-        <button onClick={this.turningPersons}>Turn on/off</button>
+        <button className={classes.estoEste} onClick={this.turningPersons}>Turn on/off</button>
+        <p className={assigment.join(' ')}>This is really working</p>
         {persons}
       </div>
     );

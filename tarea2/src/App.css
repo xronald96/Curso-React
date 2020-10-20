@@ -1,0 +1,8 @@
+.div{
+  display: flex;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: unset;
+    margin-top: 2%;
+}

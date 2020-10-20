@@ -18,12 +18,13 @@ class App extends Component {
     const value = this.state.showPersons
     this.setState({ ...this.state, showPersons: !value })
   }
-  newChangedHandler = (event) => {
+  newChangedHandler = (event, index) => {
+    const p =  {...this.state.persons[index]}; // hace uuna copia del objeto persona
+    p.name = event.target.value;
+    const persons = [...this.state.persons];
+    persons[index]= p;
     this.setState({
-      persons: [
-        { name: event.target.value, age: 28 },
-        { name: 'Cristina', age: 23 }
-      ],
+      persons
     })
   }
   render() {
@@ -36,19 +37,10 @@ class App extends Component {
               name={it.name}
               age={it.age}
               click={() => this.deletePersonHangler(index)}
-              changed={this.newChangedHandler}
+              changed={(evt)=>this.newChangedHandler(evt, index)}
             />)
           })
         }
-        {/* <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHanhler.bind(this, "Ronald")}
-          changed={this.newChangedHandler}
-        />
-        <Person name={this.state.persons[1].name}
-          age={this.state.persons[1].age}>My hobbi
-      </Person> */}
       </div>)
     }
 

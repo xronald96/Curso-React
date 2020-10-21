@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person'
+import Cockpit from './components/Cockpit/Cockpit';
+import Persons from './components/Persons/Persons'
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('this constructr App.js')
+  }
+
   state = {
     persons: [
       { name: 'Max', age: 28 },
@@ -18,45 +24,27 @@ class App extends Component {
     const value = this.state.showPersons
     this.setState({ ...this.state, showPersons: !value })
   }
-  newChangedHandler = (event, index) => {
-    const p =  {...this.state.persons[index]}; // hace uuna copia del objeto persona
-    p.name = event.target.value;
-    const persons = [...this.state.persons];
-    persons[index]= p;
+  newChangedHandler = (event) => {
     this.setState({
-      persons
+      persons: [
+        { name: event.target.value, age: 28 },
+        { name: 'Cristina', age: 23 }
+      ],
     })
   }
   render() {
     let persons = null;
-    let assigment = []
     let styleButton = []
     if (this.state.showPersons) {
       persons = (<div>
-        {
-          this.state.persons.map((it, index) => {
-            return (<Person key={index}
-              name={it.name}
-              age={it.age}
-              click={() => this.deletePersonHangler(index)}
-              changed={(evt)=>this.newChangedHandler(evt, index)}
-            />)
-          })
-        }
+        <Persons clicked={this.deletePersonHangler} changed={this.newChangedHandler} persons={this.state.persons}></Persons>
       </div>)
-      assigment.push(classes.red)
       styleButton.push('button-clicked')
-    }
-    if (this.state.persons.length <= 1) {
-      assigment.push(classes.bold)
     }
 
     return (
       <div className={classes.App}>
-
-        <button onClick={() => this.switchNameHanhler('Maxii')}> Switch names </button>
-        <button className={classes.estoEste} onClick={this.turningPersons}>Turn on/off</button>
-        <p className={assigment.join(' ')}>This is really working</p>
+        <Cockpit clicked={this.turningPersons} persons={this.state.persons} showPersons={this.state.showPersons}></Cockpit>
         {persons}
       </div>
     );

@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import Person from './Person/Person'
 class Persons extends Component {
+
+  componentWillUnmount() {
+    console.log("[Persons.js] Desmontaje de todo ")
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[Persons.js] shouldComponentUpdate');
+    if (this.props.persons !== nextProps.persons)
+      return true;
+    else
+      return false;
+  }
   render() {
     return (
       <div >

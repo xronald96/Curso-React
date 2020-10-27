@@ -13,7 +13,8 @@ class App extends Component {
       { name: 'Max', age: 28 },
       { name: 'Manue', age: 23 }
     ],
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   }
   deletePersonHangler = (index) => {
     let arrayP = [...this.state.persons];
@@ -44,7 +45,10 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit clicked={this.turningPersons} persons={this.state.persons} showPersons={this.state.showPersons}></Cockpit>
+        <button onClick={() => {
+          this.setState({ showCockpit: !this.state.showCockpit })
+        }}>Omitir Cockpit</button>
+        {this.state.showCockpit ? <Cockpit clicked={this.turningPersons} personsLength={this.state.persons.length} showPersons={this.state.showPersons}></Cockpit> : null}
         {persons}
       </div>
     );
